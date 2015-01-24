@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Type II Diabetes Risk Calculator</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Type II Diabetes Risk Calculator">
+  <meta name="author" content="Owamo">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/js/slides" 
+    src="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Type II Diabetes Risk Calculator</h1>
+    <h2>A Shiny application to predict the 7-year risk of type II diabetes</h2>
+    <p>Owamo<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Diabetes prevalence in the United States</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>According to the <a href="http://www.cdc.gov/diabetes/pubs/statsreport14/national-diabetes-report-web.pdf">National Diabetes Statistics Report</a> 29.1 million people of the U.S. population have diabetes.</p>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA6gAAAEgCAMAAACO466GAAAAn1BMVEX9/v0AAAAAADkAAGUAOTkAOWUAOY8AZo8AZrU5AAA5ADk5AGU5OTk5OWU5OY85ZmU5j485j7U5j9plAABlADllAGVlOQBlOY9lZjllZmVlZrVltbVltf2POQCPOTmPOWWPZgCPtY+P2/21ZgC1ZmW1tWW124+1/rW1/tq1/v3ajzna24/a/rXa/tra/v39tWX924/9/rX9/tr9/v3/AAD3btnyAAAANXRSTlP///////////////////////////////////////////////////////////////////8A/8KTwvUAAAAJcEhZcwAACxIAAAsSAdLdfvwAABTgSURBVHic7Z0Le+O4dYbDmdaVZ9tpKs+km6486VrJplYbSzb3//+24k6QBCWQBC+g3vfZHcoQeA5A4SNuBPGHEgBWzx+WTgAA3AahAmQAQgXIAIQKkAEIFSADECpABiBUgAxAqAAZgFABMgChAmQAQgXIAIQKkAEIFSADECpABiBUgAxAqAAZsDmhfjwXu7iY70+fX2PsxcS6PBafXuLcDqJm//3p4S0u8R1IA7U/fGuhDB8PXabiL3dMSqTnlq/rLjwLl8edCigKm4NToTiowDHpXJ7NCVUU6cginFKox6KzKCehZr9WuofQEqr/ZSDDV3IXf7ljUiJMtX1dd1FZOCotSkkWhQnTQpU3InncD0/n8mxOqKfiz/KnFsXtb+rO6n941T/rWfxoon6yQm3HOBf/8iwCTvJerL9VP/xJ3ZxFyKefbf12Ur+/uOebKM6Wja1snkQcW6BkXPm9SYQshn58LyBkX338xdaB1oYI/Px3Edjwvi8D5q2BsstaK8PK+64zgepy+1fMOa+SYxOoTvFSrZy7yy5S8T/aV8iFZySUF/H5X2UqL4/SkNe8OYvPZ/FN3B13tWxNqOLn+E22gFTpKtTv4z648mBvs1aozRjnwvL51XwrSsOxKJqy0UE7X6jGlot9EkXqKALO+oauI3x+rRLRsF6rEbrs68TbqCrwnx7NB8/7rmyZr7Jz1Zp/jhFqMIH2cvtXzDmv/wYygfKUlp+2UIMuKiPhvPx4OVdCrTT5/rQvjVAn7ZxMzdaEKvop6ocXP+Je/D6qPNgPtkYtdSvLE2ojxlkUN3FT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" alt="plot of chunk unnamed-chunk-1"> </p>
+
+<p>In 2012 there were 1.7 million <em>new</em> diabetes cases, <strong>middle-aged adults</strong> (45-64 years) had the highest rates.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Why predict diabetes risk?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Accurate diabetes risk information will help:</p>
+
+<ol>
+<li>Primary healthcare providers to identify high risk individuals and deliver timely care to manage and reduce their risk.</li>
+<li>Health and medical insurers to set insurance premiums according to each customer&#39;s risk profile, improving company profits.</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>How does the app work?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The <strong>Type II Diabetes (T2D) Risk Calculator</strong> will generate a 7-year risk prediction based on prediciton rules developed by <a href="http://archinte.jamanetwork.com/article.aspx?articleid=486842">Wilson et al. (2007)</a>. In that study, the authors fit a logisitic regression to estimate incidence of new T2D cases over a 7-year period. To obtain our predictions, take the inverse logit transformation of a linear combination of the relevant estimated model parameters.</p>
+
+<p>For example, a 45 year-old male with healthy weight, no other medical conditions, but with elevated fasting glucose levels and parental history of diabetes has a 4.82% chance of developing diabetes in the next 7 years. </p>
+
+<pre><code class="r">linearComb &lt;- -5.517 - 0.010 + 1.98 + 0.565
+1/(1 + exp(-linearComb))
+</code></pre>
+
+<pre><code>## [1] 0.04824571
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>How well does the algorithm work?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>The <a href="http://archinte.jamanetwork.com/article.aspx?articleid=486842">study</a> found this algorithm has good classification results. The area under the ROC curve was 0.852. </li>
+<li>More complex models have marginally better classification (0.854 area under ROC curve). However it involves  clinical variables that are more costly and difficult to obtain.</li>
+<li>Note that the algorithm works best for populations for which the prediction algorithm was developed, i.e. middle-aged caucasians.</li>
+</ul>
+
+<p>You can start using the <strong>T2D Risk Calculator</strong> by following this <a href="https://owamo.shinyapps.io/T2Drisk/">link</a>. Instructions on how to use the application are also there.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Diabetes prevalence in the United States'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Why predict diabetes risk?'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='How does the app work?'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='How well does the algorithm work?'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
